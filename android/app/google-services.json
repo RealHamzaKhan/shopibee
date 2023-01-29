@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "616380267515",
+    "project_id": "shopibee-2caeb",
+    "storage_bucket": "shopibee-2caeb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616380267515:android:e50e7632373287a125295e",
+        "android_client_info": {
+          "package_name": "com.example.shopibee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "616380267515-7e3mer3q99k7om5beqid2rke9a67ci1b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shopibee",
+            "certificate_hash": "4ba4eb3df0b9059d9799bd1cc67aa2a0fad434fd"
+          }
+        },
+        {
+          "client_id": "616380267515-7drc8crk8g7eskic3fop3ibvngmg0b4o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAfk2HY9xR24aBS9EiEIXLKHHyel8Bh6s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "616380267515-7drc8crk8g7eskic3fop3ibvngmg0b4o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
