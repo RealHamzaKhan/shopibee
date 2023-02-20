@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shopibee/consts/colors.dart';
 import 'package:shopibee/consts/consts.dart';
+import 'package:shopibee/controllers/auth_controller.dart';
 import 'package:shopibee/views/auth_screen/login_screen.dart';
 import 'package:shopibee/views/home_screen/Home_Screen.dart';
 import 'package:shopibee/views/home_screen/home.dart';
@@ -29,6 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   @override
   void initState() {
+    Get.put(AuthController());
     changeScreen();
     // TODO: implement initState
     super.initState();

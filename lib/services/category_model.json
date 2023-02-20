@@ -1,0 +1,91 @@
+{
+  "categories": [
+    {
+      "name": "Women Clothing",
+      "subcategories": [
+        "Wedding & Events",
+        "Tops & Sets",
+        "Watches",
+        "Designer Dresses",
+        "Formal Dresses",
+        "Footwear",
+        "Fashion"
+      ]
+    },
+    {
+      "name": "Men Clothing & Fashion",
+      "subcategories": [
+        "Suits",
+        "Formal Clothes",
+        "Watches",
+        "Latest Collection",
+        "Office wear",
+        "Shoes"
+      ]
+    },
+    {
+      "name": "Computer And Accessories",
+      "subcategories": [
+        "Computer Accessories",
+        "Computer Components",
+        "Gaming Laptops & Computers",
+        "Office use"
+      ]
+    },
+    {
+      "name": "AutoMobile",
+      "subcategories": [
+        "New",
+        "Used",
+        "Parts",
+        "Best Selling"
+      ]
+    },
+    {
+      "name": "Kids And Toys",
+      "subcategories": [
+        "Toys",
+        "Kids Special",
+        "Best for Kids"
+      ]
+    },
+    {
+      "name": "Sports",
+      "subcategories": [
+        "Football",
+        "Best Selling",
+        "Low Price",
+        "Best Brands"
+      ]
+    },
+    {
+      "name": "Jewellery",
+      "subcategories": [
+        "Watches",
+        "Bracelets",
+        "Gold",
+        "Silver",
+        "Gold Plated"
+      ]
+    },
+    {
+      "name": "CellPhone & Tabs",
+      "subcategories": [
+        "New",
+        "Used",
+        "Smart Phones",
+        "Tablets",
+        "Top Brands",
+        "Mobile Accessories"
+      ]
+    },
+    {
+      "name": "Furniture",
+      "subcategories": [
+        "New",
+        "Used",
+        "Imported"
+      ]
+    }
+  ]
+}

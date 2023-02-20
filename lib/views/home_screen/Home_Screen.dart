@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shopibee/consts/consts.dart';
 import 'package:shopibee/consts/lists.dart';
+import 'package:shopibee/services/firestore_services.dart';
+import 'package:shopibee/views/categories/product_detials.dart';
 import 'package:shopibee/views/home_screen/components/featured_button.dart';
 import 'package:shopibee/widgets_common/home_button.dart';
 class HomeScreen extends StatelessWidget {
@@ -148,32 +151,44 @@ class HomeScreen extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: allProducts.text.bold.size(20).make()),
                     10.heightBox,
-                    GridView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 6,
-                        shrinkWrap: true,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          mainAxisExtent: 300,
-                        ),
-                        itemBuilder: (context,index){
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.asset(imgP5,fit: BoxFit.cover,width: 200,height: 200,),
-                              const Spacer(),
-                              "Laptop 6/512".text.color(darkFontGrey).semiBold.size(16).make(),
-                              10.heightBox,
-                              "\$665".text.semiBold.color(redColor).make()
-                            ],
-                          ).box
-                              .roundedSM
-                              .white
-                              .padding(const EdgeInsets.symmetric(horizontal: 7,vertical: 8))
-                              .shadowSm.margin(const EdgeInsets.symmetric(horizontal: 5))
-                              .make();
-                    }),
+                    StreamBuilder(
+                        stream: FireStoreServices.getAllProducts(),
+                        builder: (context,AsyncSnapshot<QuerySnapshot>snapshot){
+                          if(!snapshot.hasData || snapshot.hasError){
+                            return Container();
+                          }
+                          else{
+                            var allprod=snapshot.data!.docs;
+                            return GridView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: allprod.length,
+                                shrinkWrap: true,
+                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: 10,
+                                  mainAxisExtent: 300,
+                                ),
+                                itemBuilder: (context,index){
+                                  return Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Image.network(allprod[index]['p_images'][1],fit: BoxFit.cover,width: 200,height: 200,),
+                                      const Spacer(),
+                                      "${allprod[index]['p_name']}".text.color(darkFontGrey).semiBold.size(16).make(),
+                                      10.heightBox,
+                                      "${allprod[index]['p_price']}".numCurrency.text.semiBold.color(redColor).make()
+                                    ],
+                                  ).box
+                                      .roundedSM
+                                      .white
+                                      .padding(const EdgeInsets.symmetric(horizontal: 7,vertical: 8))
+                                      .shadowSm.margin(const EdgeInsets.symmetric(horizontal: 5))
+                                      .make().onTap(() {
+                                        Get.to(()=>ProductDetails(product: snapshot.data!.docs[index]));
+                                  });
+                                });
+                          }
+                        })
                   ],
                 ),
               ),

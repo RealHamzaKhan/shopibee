@@ -37,4 +37,6 @@ const video="Video",reviews='Reviews',sellerpolicy="Seller Policy",returnPolicy=
 
 //Acount screen
 const inYourCart='In your cart',inYourwishList='In your wishlist',youOrdered='Your ordered',
-    myOrders="My Orders",myWishList="My Wishlist",messages="Messages";
+    myOrders="My Orders",myWishList="My Wishlist",messages="Messages",unableToFetchData="Unable to fetch data";
+//payment methods
+const paypal="Paypal",stripe="Stripe",cod="Cash on delivery";

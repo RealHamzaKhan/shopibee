@@ -3,11 +3,14 @@ import 'package:shopibee/consts/consts.dart';
 import 'package:shopibee/consts/lists.dart';
 import 'package:shopibee/views/categories/category_details.dart';
 import 'package:shopibee/widgets_common/bg_widget.dart';
+
+import '../../controllers/product_controller.dart';
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller=Get.put(ProductController());
     return bgWidget(child: Scaffold(
       appBar: AppBar(
         title: 'Categories'.text.make(),
@@ -34,7 +37,8 @@ class CategoriesScreen extends StatelessWidget {
             .white
             .padding(const EdgeInsets.symmetric(horizontal: 7,vertical: 8))
             .shadowSm.margin(const EdgeInsets.symmetric(horizontal: 5))
-            .make().onTap(() {
+            .make().onTap(() async{
+              controller.getSubCategories(categoriestitles[index]);
               Get.to(()=>CategoryDetails(title: categoriestitles[index]));
         });
     }),

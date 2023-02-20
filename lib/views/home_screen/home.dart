@@ -3,6 +3,7 @@ import 'package:shopibee/consts/consts.dart';
 import 'package:shopibee/controllers/home_screen_controller.dart';
 import 'package:shopibee/views/cart/cart_screen.dart';
 import 'package:shopibee/views/profile/Profile_screen.dart';
+import 'package:shopibee/widgets_common/exit_dialogue.dart';
 
 import '../categories/categories_screen.dart';
 import 'Home_Screen.dart';
@@ -24,23 +25,29 @@ class Home extends StatelessWidget {
       CartScreen(),
       ProfileScreen(),
     ];
-    return Scaffold(
-      body: Column(
-        children: [
-          Obx(() => Expanded(child: navViews[navController.navItemIndex.value])),
-        ],
-      ),
-      bottomNavigationBar: Obx(()=>
-          BottomNavigationBar(
-            currentIndex: navController.navItemIndex.value,
-            selectedItemColor: redColor,
-            selectedLabelStyle: TextStyle(fontFamily: bold),
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.white,
-            items: navItems,
-            onTap: (newValue){
-              navController.navItemIndex.value=newValue;
-    },
+    return WillPopScope(
+      onWillPop: ()async{
+        showDialog(context: context, builder: (context)=>exitDialogue(context: context));
+        return false;
+      },
+      child: Scaffold(
+        body: Column(
+          children: [
+            Obx(() => Expanded(child: navViews[navController.navItemIndex.value])),
+          ],
+        ),
+        bottomNavigationBar: Obx(()=>
+            BottomNavigationBar(
+              currentIndex: navController.navItemIndex.value,
+              selectedItemColor: redColor,
+              selectedLabelStyle: TextStyle(fontFamily: bold),
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: Colors.white,
+              items: navItems,
+              onTap: (newValue){
+                navController.navItemIndex.value=newValue;
+      },
+          ),
         ),
       ),
     );

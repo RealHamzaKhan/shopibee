@@ -9,7 +9,8 @@ import 'package:shopibee/widgets_common/cutom_Button.dart';
 
 import '../../controllers/profile_controller.dart';
 class EditProfile extends StatelessWidget {
-  const EditProfile({Key? key}) : super(key: key);
+  dynamic data;
+   EditProfile({Key? key,required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class EditProfile extends StatelessWidget {
     final controller=Get.put(AuthController());
     return bgWidget(
       child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: context.screenHeight*0.1),
+        padding:  EdgeInsets.symmetric(horizontal: 20.0,vertical: context.screenHeight*0.05),
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           body:SafeArea(
@@ -26,23 +27,81 @@ class EditProfile extends StatelessWidget {
               child: Obx(()=>
                 Column(
                   children: [
-                    profileController.profileImagePath.isEmpty?
+                   data['imageUrl']=='' && profileController.profileImagePath.isEmpty?
                     Image.asset(imgP1,fit: BoxFit.fill,).box.roundedFull
                     .size(context.screenWidth*0.3,context.screenHeight*0.3)
                     .clip(Clip.antiAlias).make()
-                    :Image.file(File(profileController.profileImagePath.value),fit: BoxFit.fill,)
-                        .box.roundedFull
-                        .size(context.screenWidth*0.3,context.screenHeight*0.3)
-                        .clip(Clip.antiAlias).make(),
+                   :profileController.profileImagePath.isNotEmpty?
+                  Image.file(File(profileController.profileImagePath.value),fit: BoxFit.fill,)
+                .box.roundedFull
+                .size(context.screenWidth*0.3,context.screenHeight*0.3)
+                .clip(Clip.antiAlias).make()
+                    :Image.network(data['imageUrl']).box.roundedFull
+                       .size(context.screenWidth*0.3,context.screenHeight*0.3)
+                       .clip(Clip.antiAlias).make(),
                     CustomButton(onPress: (){
                       profileController.changeImage(context: context);
                     }, title: 'Pick Image', color: lightGolden),
                     20.heightBox,
-                    customTextField(title: "Email", hintText: "demo@gmail.com", controller: controller.emailController),
+                    customTextField(title: "Name", hintText: "", controller: profileController.nameController),
                     20.heightBox,
-                    customTextField(title: "Password", hintText: "*****", controller: controller.passwordController),
+                    customTextField(title: "Old Password", hintText: "*****", controller: profileController.OldpasswordController,isPassword: true),
                     20.heightBox,
-                    CustomButton(onPress: (){}, title: "Save", color: golden),
+                    customTextField(title: "New Password", hintText: "*****", controller: profileController.newPasswordController,isPassword: true),
+                    20.heightBox,
+                    profileController.isUpdated.value?const CircularProgressIndicator(color: Colors.black,):
+                    CustomButton(onPress: ()async{
+                      profileController.isUpdated.value=true;
+                      if(profileController.profileImagePath.value.isNotEmpty){
+                        try{
+                          if(profileController.OldpasswordController.text==data['password']){
+                            await profileController.uploadProfileImage(context);
+                            await profileController.changeAuthPassword(email: data['email'],
+                                OldPassword: profileController.OldpasswordController.text,
+                                newPassword: profileController.newPasswordController.text);
+                            await profileController.updateProfile(newName: profileController.nameController.text,
+                              newPass: profileController.newPasswordController.text,
+                              newImage: profileController.imageLink,
+                            );
+                            VxToast.show(context, msg: 'Profile Updated Successfully');
+                          }
+                          else{
+                            VxToast.show(context, msg: "Wrong Old Password");
+                          }
+                        }
+                        catch(e){
+                          VxToast.show(context, msg: "Unable to update profile kindly try later");
+
+                        }
+                        profileController.isUpdated.value=false;
+                      }
+                      else{
+                        try{
+                          if(profileController.OldpasswordController.text==data['password']) {
+                            await profileController.changeAuthPassword(email: data['email'],
+                                OldPassword: profileController.OldpasswordController.text,
+                                newPassword: profileController.newPasswordController.text);
+                            await profileController.updateProfile(
+                              newName: profileController.nameController.text,
+                              newPass: profileController.newPasswordController.text,
+                              newImage: data['imageUrl'],
+
+                            );
+                            VxToast.show(context, msg: 'Profile Updated Successfully');
+                          }
+                          else{
+                            VxToast.show(context, msg: "Wrong Old Password");
+                          }
+                          controller.isLoading.value=false;
+                        }
+                        catch(e){
+                          VxToast.show(context, msg: "Unable to update profile kindly try later");
+                          controller.isLoading.value=false;
+                        }
+                        profileController.isUpdated.value=false;
+                      }
+
+                    }, title: "Save", color: golden).box.width(double.infinity).make(),
                   ],
                 ),
               ),

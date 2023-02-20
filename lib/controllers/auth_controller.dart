@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -41,13 +43,17 @@ class AuthController extends GetxController {
   storeUserData(
       {required String name, required String password, required String email}) async {
     DocumentReference store = firestore.collection(usersCollection).doc(
-        auth.currentUser!.uid);
+        user!.uid);
     store.set({
-      'id':auth.currentUser!.uid,
+      'id':user!.uid,
       'name': name,
       'password': password,
       'email': email,
-      'imageUrl': ''
+      'imageUrl': '',
+      'cart_count':'00',
+      'wishlist_count':'00',
+      'order_count':'00'
+
     });
   }
   signoutMethod(context)async{
@@ -58,4 +64,5 @@ class AuthController extends GetxController {
       VxToast.show(context, msg: e.toString());
     }
   }
+
 }

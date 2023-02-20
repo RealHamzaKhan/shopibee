@@ -39,7 +39,7 @@ const categoriestitles=[
   cellphone,furniture
 ];
 const categoriesImages=[
-  imgFc1,imgFc2,imgFc3,imgFc4,imgFc5,imgFc6,imgFc7,imgFc8,imgFc9,
+  imgProfile2,imgFc1,imgP3,imgFc3,imgFc4,imgFc5,imgS10,imgFc6,imgFc9,
 ];
 const productDetailsStringsList=[
   video,
@@ -48,3 +48,5 @@ const productDetailsStringsList=[
 ];
 const profileStringList=[myOrders,myWishList,messages];
 const profileIconsList=[icOrders,icOrder,icMessages];
+const paymentMethodsStringList=[stripe,paypal,cod];
+const paymentMethodsImagesList=[imgStripe,imgPaypal,imgCod];
