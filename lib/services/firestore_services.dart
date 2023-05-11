@@ -52,4 +52,13 @@ static getCount()async{
 static getAllProducts(){
     return firestore.collection(productCollection).snapshots();
 }
+static getFeatureProducts(){
+    return firestore.collection(productCollection).where('is_featured',isEqualTo: true).get();
+}
+static searchProduct({required String product}){
+    return firestore.collection(productCollection).where('p_name'.toLowerCase(),isLessThanOrEqualTo: product).snapshots();
+}
+static getSubCategoryProducts({title}){
+    return firestore.collection(productCollection).where('p_subcategory',isEqualTo:title).snapshots();
+}
 }

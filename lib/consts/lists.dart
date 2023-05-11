@@ -24,14 +24,14 @@ const featureImages2=[
   imgS4,imgS5,imgS6
 ];
 const featureTitle1=[
-  girlsDress,
-  womenDress,
-  womenWatches
+  womenClothing,
+  menClothingFashion,
+  compAccess
 ];
 const featureTitle2=[
-  boyGlasses,
-  mobilePhones,
-  tshirt,
+  authoMobile,
+  jewellery,
+  furniture,
 ];
 const categoriestitles=[
   womenClothing,menClothingFashion,compAccess,

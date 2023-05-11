@@ -1,6 +1,6 @@
-const appname = "eMart";
+const appname = "ShopiBee";
 const appversion = "Version 1.0.0";
-const credits = "@Hamza";
+const credits = "@Sarah";
 const email="Email";
 const emailHintText="John@gmail.com";
 const name="Name";

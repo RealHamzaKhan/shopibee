@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:shopibee/consts/consts.dart';
-import 'package:shopibee/consts/lists.dart';
 import 'package:shopibee/controllers/auth_controller.dart';
 import 'package:shopibee/views/auth_screen/signup_screen.dart';
 import 'package:shopibee/views/home_screen/home.dart';
@@ -23,7 +20,7 @@ class LoginScreen extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            (context.screenHeight * 0.1).heightBox,
+            (context.screenHeight * 0.01).heightBox,
             appLogoWidget(),
             10.heightBox,
             'Login to $appname'.text.semiBold.white.size(15).make(),
@@ -65,20 +62,20 @@ class LoginScreen extends StatelessWidget {
                     }, title: createNewAccount, color: lightGolden).box
                     .width(context.screenWidth-20).make(),
                 5.heightBox,
-                "Or Login with".text.gray400.medium.make(),
-                5.heightBox,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(3, (index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage(socialIconsList[index]),
-                        backgroundColor: Colors.white,
-                      ),
-                    );
-                  }),
-                )
+                // "Or Login with".text.gray400.medium.make(),
+                // 5.heightBox,
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: List.generate(3, (index) {
+                //     return Padding(
+                //       padding: const EdgeInsets.all(12.0),
+                //       child: CircleAvatar(
+                //         backgroundImage: AssetImage(socialIconsList[index]),
+                //         backgroundColor: Colors.white,
+                //       ),
+                //     );
+                //   }),
+                // )
               ],
             )
                 .box

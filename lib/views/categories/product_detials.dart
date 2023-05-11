@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shopibee/consts/consts.dart';
 import 'package:shopibee/consts/lists.dart';
 import 'package:shopibee/controllers/auth_controller.dart';
 import 'package:shopibee/controllers/product_controller.dart';
+import 'package:shopibee/services/firestore_services.dart';
 import 'package:shopibee/widgets_common/cutom_Button.dart';
 import '../chat_screen/chat_screen.dart';
 
@@ -284,7 +286,14 @@ class ProductDetails extends StatelessWidget {
                               .make(),
                         ),
                       ),
-                      Column(
+                      StreamBuilder(
+                        stream: FireStoreServices.getAllProducts(),
+                        builder: (context,AsyncSnapshot<QuerySnapshot>snapshot){
+                          if(!snapshot.hasData){
+                            return Container();
+                          }
+                          else{
+                            return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           productYouLike.text.fontFamily(semibold).make(),
@@ -293,25 +302,28 @@ class ProductDetails extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             child: Row(
                                 children: List.generate(
-                                    6,
-                                    (index) => Column(
+                                    snapshot.data!.docs.length,
+                                    (i) => Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Image.asset(
-                                              imgP1,
+                                            Image.network(
+                                              snapshot.data!.docs[i]['p_images'][0],
                                               fit: BoxFit.fill,
                                               width: 100,
-                                            ),
+                                            ).onTap(() {
+                                          //     var snap=snapshot.data!.docs[i];
+                                          // Get.to(ProductDetails(product: snap));
+                                            }),
                                             10.heightBox,
-                                            "Laptop 6/512"
+                                            "${snapshot.data!.docs[i]['p_name']}"
                                                 .text
                                                 .color(darkFontGrey)
                                                 .semiBold
                                                 .size(16)
                                                 .make(),
                                             10.heightBox,
-                                            "\$665".text.semiBold.make()
+                                            "${snapshot.data!.docs[i]['p_price']}".text.semiBold.make()
                                           ],
                                         )
                                             .box
@@ -324,7 +336,9 @@ class ProductDetails extends StatelessWidget {
                                             .make())),
                           )
                         ],
-                      ).box.white.p12.make()
+                      ).box.white.p12.make();
+                          }
+                      })
                     ],
                   ),
                 ),

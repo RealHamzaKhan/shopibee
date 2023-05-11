@@ -120,8 +120,7 @@ class ProfileScreen extends StatelessWidget {
                     leading: Image.asset(profileIconsList[index],width: 25,),
                   );
                 })
-            ).box.rounded.white.margin(EdgeInsets.all(16)).make()
-                .box.color(redColor).make()
+            ).box.rounded.white.margin(const EdgeInsets.all(16)).shadowMd.make()
           ],
         );
       })
